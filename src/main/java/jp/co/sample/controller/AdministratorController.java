@@ -38,6 +38,6 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/toInsert")
 	public String toInsert() {
-		return "/administrator/insert";
+		return "administrator/insert";
 	}
 }
