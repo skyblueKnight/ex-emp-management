@@ -21,9 +21,9 @@ public class AdministratorService {
 	private AdministratorRepository administratorRepository; 
 	
 	/**
-	 * 管理者情報を追加する.
+	 * 管理者情報を登録する.
 	 * 
-	 * @param administrator 追加する管理者情報
+	 * @param administrator 登録する管理者情報
 	 */
 	public void insert(Administrator administrator) {
 		administratorRepository.insert(administrator);

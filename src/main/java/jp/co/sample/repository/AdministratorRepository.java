@@ -35,9 +35,9 @@ public class AdministratorRepository {
 	private NamedParameterJdbcTemplate template;
 
 	/**
-	 * 管理者の情報を追加する.
+	 * 管理者の情報を登録する.
 	 * 
-	 * @param administrator 追加する管理者情報
+	 * @param administrator 登録する管理者情報
 	 */
 	public void insert(Administrator administrator) {
 

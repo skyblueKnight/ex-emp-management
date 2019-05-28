@@ -24,15 +24,36 @@ public class AdministratorController {
 	private AdministratorService administratorService;
 
 	/**
-	 * 管理者フォームをインスタンス化する.
+	 * 管理者登録フォームをインスタンス化する.
 	 * 
-	 * @return 管理者フォーム
+	 * @return 管理者登録フォーム
 	 */
 	@ModelAttribute
 	public InsertAdministratorForm setUpInsertAdministratorForm() {
 		return new InsertAdministratorForm();
 	}
-
+	
+	/**
+	 * 管理者ログインフォームをインスタンス化する.
+	 * 
+	 * @return 管理者ログインフォーム
+	 */
+	@ModelAttribute
+	public LoginForm setUpLoginForm() {
+		return new LoginForm();
+	}
+	
+	
+	/**
+	 * ログイン画面に遷移する.
+	 * 
+	 * @return ログイン画面
+	 */
+	@RequestMapping("/")
+	public String toLogin() {
+		return "administrator/login";
+	}
+	
 	/**
 	 * 管理者登録画面に遷移する.
 	 * 
