@@ -3,6 +3,7 @@ package jp.co.sample.repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -45,34 +46,36 @@ public class EmployeeRepository {
 	/**
 	 * 従業員一覧情報を入社日順で取得する.
 	 * 
-	 * @return 従業員一覧情報
+	 * @return 従業員一覧情報（存在しない場合はnull）
 	 */
 	public List<Employee> findAll() {
-		
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees;";
-		List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
-		
-		return employeeList;
+
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count "
+				+ "FROM employees;";
+		try {
+			List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
+			return employeeList;
+		} catch (DataAccessException e) {
+			return null;
+		}
 	}
-	
-	
+
 	/**
 	 * 主キーから従業員情報を取得する.
 	 * 
 	 * @param id 検索するID
-	 * @return 取得した従業員情報
+	 * @return 取得した従業員情報（存在しない場合は例外（DataAccessException）発生）
 	 */
 	public Employee load(Integer id) {
-		
+
 		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count"
 				+ " FROM employees WHERE id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
-		
+
 		return employee;
 	}
-	
-	
+
 	/**
 	 * 従業員情報を変更する.<br>
 	 * 従業員情報のうち、扶養人数だけを更新する.
@@ -80,11 +83,11 @@ public class EmployeeRepository {
 	 * @param employee 変更する従業員情報
 	 */
 	public void update(Employee employee) {
-		
+
 		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
 		String sql = "UPDATE employees SET dependents_count = :dependentsCount WHERE id = :id;";
 		template.update(sql, param);
-		
+
 	}
 
 }
