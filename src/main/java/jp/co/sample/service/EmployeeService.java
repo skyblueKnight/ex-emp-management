@@ -23,6 +23,11 @@ public class EmployeeService {
 	private EmployeeRepository employeeRepository;
 	
 	
+	/**
+	 * 従業員情報一覧を取得する.
+	 * 
+	 * @return 従業員情報一覧
+	 */
 	public List<Employee> showList(){
 		return employeeRepository.findAll();
 	}
