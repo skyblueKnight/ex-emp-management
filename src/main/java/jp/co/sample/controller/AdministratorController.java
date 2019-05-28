@@ -100,7 +100,7 @@ public class AdministratorController {
 		Administrator administrator = administratorService.login(loginForm.getMailAddress(), loginForm.getPassword());
 
 		if (administrator == null) {
-			result.rejectValue(loginForm.getMailAddress(), null, "メールアドレスまたはパスワードが不正です。");
+			result.rejectValue("mailAddress", null, "メールアドレスまたはパスワードが不正です。");
 			return toLogin(model);
 		}
 
