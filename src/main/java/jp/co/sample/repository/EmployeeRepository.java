@@ -32,10 +32,11 @@ public class EmployeeRepository {
 		emoployee.setHireDate(rs.getDate("hire_date"));
 		emoployee.setMailAddress(rs.getString("mail_address"));
 		emoployee.setZipCode(rs.getString("zip_code"));
+		emoployee.setAddress(rs.getString("address"));		
 		emoployee.setTelephone(rs.getString("telephone"));
 		emoployee.setSalary(rs.getInt("salary"));
 		emoployee.setCharacteristics(rs.getString("characteristics"));
-		emoployee.setDependentsCount(rs.getInt("dependentsCount"));
+		emoployee.setDependentsCount(rs.getInt("dependents_count"));
 
 		return emoployee;
 	};
@@ -51,11 +52,14 @@ public class EmployeeRepository {
 	public List<Employee> findAll() {
 
 		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count "
-				+ "FROM employees;";
+				+ " FROM employees"
+				+ " ORDER BY hire_date;";
 		try {
 			List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 			return employeeList;
 		} catch (DataAccessException e) {
+			System.out.println("error");
+			System.err.println(e);
 			return null;
 		}
 	}
@@ -68,7 +72,8 @@ public class EmployeeRepository {
 	 */
 	public Employee load(Integer id) {
 
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count"
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,"
+				+ "address,telephone,salary,characteristics,dependents_count"
 				+ " FROM employees WHERE id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Employee employee = template.queryForObject(sql, param, EMPLOYEE_ROW_MAPPER);
