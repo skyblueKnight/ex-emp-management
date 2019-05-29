@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.LoginForm;
 import jp.co.sample.service.AdministratorService;
 
 /**
@@ -57,7 +58,7 @@ public class AdministratorController {
 	 * @return ログイン画面
 	 */
 	@RequestMapping("/")
-	public String toLogin(Model model) {
+	public String toLogin() {
 		return "administrator/login";
 	}
 
@@ -72,13 +73,20 @@ public class AdministratorController {
 	}
 
 	/**
-	 * 管理者情報を登録する.
+	 * 管理者情報を登録する.<br>
+	 * 入力値に問題がなければ、登録処理を行ってログイン画面に遷移する。
+	 * 入力値にエラーがあった場合は、登録せずに登録画面に戻る。
 	 * 
 	 * @param form 入力された管理者情報
-	 * @return ログイン画面（リダイレクト）
+	 * @return 登録時：ログイン画面（リダイレクト）/  エラー時：登録画面
 	 */
 	@RequestMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insert(@Validated InsertAdministratorForm form, BindingResult result, Model model) {
+
+		if(result.hasErrors()) {
+			return toInsert();
+		}
+		
 		Administrator administrator = new Administrator();
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
@@ -95,13 +103,13 @@ public class AdministratorController {
 	 * @return 成功時/従業員リストページ 失敗時/ログイン画面
 	 */
 	@RequestMapping("/login")
-	public String login(@Validated LoginForm loginForm, BindingResult result, Model model) {
+	public String login(@Validated LoginForm loginForm, BindingResult result) {
 
 		Administrator administrator = administratorService.login(loginForm.getMailAddress(), loginForm.getPassword());
 
 		if (administrator == null) {
 			result.rejectValue("mailAddress", null, "メールアドレスまたはパスワードが不正です。");
-			return toLogin(model);
+			return toLogin();
 		}
 
 		session.setAttribute("administratorName", administrator.getName());

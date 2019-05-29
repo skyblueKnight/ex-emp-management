@@ -1,5 +1,9 @@
 package jp.co.sample.form;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * 管理者登録時に従業員情報のパラメータを受け取るフォーム.
  * 
@@ -9,10 +13,14 @@ package jp.co.sample.form;
 public class InsertAdministratorForm {
 
 	/** 名前 */
+	@NotBlank(message="名前を入力してください")
 	private String name;
 	/** メールアドレス */
+	@NotBlank(message="メールアドレスを入力してください")
+	@Email(message="メールアドレスの形式が不正です")
 	private String mailAddress;
 	/** パスワード */
+	@NotBlank(message="パスワードを入力してください")
 	private String password;
 	
 	
