@@ -2,7 +2,6 @@ package jp.co.sample.form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * 管理者登録時に従業員情報のパラメータを受け取るフォーム.

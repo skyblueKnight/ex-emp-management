@@ -77,17 +77,15 @@ public class EmployeeController {
 	@RequestMapping("/update")
 	public String update(@Validated UpdateEmployeeForm form, BindingResult result, Model model) {
 
-		Employee employee = employeeService.showDetail(Integer.parseInt(form.getId()));
-		try {
-			employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));
-			employeeService.update(employee);
-			return "redirect:/employee/showList";
-		} catch (NumberFormatException e) {
-			result.rejectValue("dependentsCount",null, "正しい数値を入力してください");
-			System.out.println(result);
+		if (result.hasErrors()) {
 			return showDetail(form.getId(), model);
 		}
 
+		Employee employee = employeeService.showDetail(Integer.parseInt(form.getId()));
+		employee.setDependentsCount(Integer.parseInt(form.getDependentsCount()));
+		employeeService.update(employee);
+
+		return "redirect:/employee/showList";
 	}
 
 }
