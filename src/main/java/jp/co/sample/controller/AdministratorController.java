@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
+import jp.co.sample.form.UpdateEmployeeForm;
 import jp.co.sample.service.AdministratorService;
 
 /**
@@ -106,7 +107,19 @@ public class AdministratorController {
 
 		session.setAttribute("administratorName", administrator.getName());
 		return "forward:/employee/showList";
+	}
 
+	/**
+	 * ログアウト処理を行う.
+	 * 
+	 * @return ログイン画面（リダイレクト）
+	 */
+	@RequestMapping("/logout")
+	public String logout() {
+
+		session.invalidate();
+
+		return "redirect:/";
 	}
 
 }
