@@ -81,14 +81,17 @@ public class EmployeeRepository {
 
 	/**
 	 * 従業員情報を変更する.<br>
-	 * 従業員情報のうち、扶養人数だけを更新する.
 	 * 
 	 * @param employee 変更する従業員情報
 	 */
 	public void update(Employee employee) {
 
 		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
-		String sql = "UPDATE employees SET dependents_count = :dependentsCount WHERE id = :id;";
+		String sql = "UPDATE employees SET "
+				+ "name=:name, gender=:gender, mail_address=:mailAddress, zip_code=:zipCode, "
+				+ " address=:address, telephone=:telephone, salary=:salary, "
+				+ " characteristics=:characteristics, dependents_count = :dependentsCount "
+				+ " WHERE id = :id;";
 		template.update(sql, param);
 
 	}
