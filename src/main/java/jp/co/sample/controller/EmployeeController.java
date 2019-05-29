@@ -63,8 +63,6 @@ public class EmployeeController {
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee",employee);
 		
-		System.out.println("showDetail");
-		
 		return "employee/detail";		
 	}
 

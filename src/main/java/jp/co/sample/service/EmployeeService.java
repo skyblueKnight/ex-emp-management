@@ -21,18 +21,16 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
-	
+
 	/**
 	 * 従業員情報一覧を取得する.
 	 * 
 	 * @return 従業員情報一覧
 	 */
-	public List<Employee> showList(){
+	public List<Employee> showList() {
 		return employeeRepository.findAll();
 	}
-	
-	
+
 	/**
 	 * IDから従業員情報を取得する.
 	 * 
@@ -42,5 +40,14 @@ public class EmployeeService {
 	public Employee showDetail(Integer id) {
 		return employeeRepository.load(id);
 	}
-	
+
+	/**
+	 * 従業員情報を更新する.
+	 * 
+	 * @param employee 更新する従業員情報
+	 */
+	public void update(Employee employee) {
+		employeeRepository.update(employee);
+	}
+
 }
