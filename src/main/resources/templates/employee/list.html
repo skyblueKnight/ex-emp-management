@@ -1,3 +1,6 @@
+
+<!-- <span th:include="employee/employee-fragment-part :: frag_header">ヘッダー</span>
+-->
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -14,9 +17,41 @@
 </head>
 <body>
 	<div class="container">
-			<span th:include="employee/employee-fragment-part :: frag_header">ヘッダー</span>
-		
-		<!-- パンくずリスト -->
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="list.html" th:href="@{/employee/showList}"> 
+						<!-- 企業ロゴ -->
+						<img src="../../static/img/header_logo_small.png" th:src="@{/img/header_logo_small.png}">
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="list.html">従業員管理</a></li>
+					</ul>
+					<p class="navbar-text navbar-right">
+						<span th:text="${session.administratorName + 'さん'}">山田さん</span>こんにちは！
+						&nbsp;&nbsp;&nbsp;
+						<a href="../administrator/login.html" class="navbar-link" th:href="@{/logout}">ログアウト</a>
+					</p>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+					
+	<!-- パンくずリスト -->
 		<ol class="breadcrumb">
 			<li class="active"><a href="list.html" th:href="@{/employee/showList}">従業員リスト</a></li>
 		</ol>
@@ -56,10 +91,8 @@
 
 
 
-
 <!-- ここから下を編集する必要はありません -->
-
-			</div>
+		</div>
 		</div>
 	</div>
 	<!-- end container -->
@@ -69,3 +102,5 @@
 	<script src="../../static/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<!-- 			<span th:include="employee/employee-fragment-part :: frag_footer">フッター</span> -->
