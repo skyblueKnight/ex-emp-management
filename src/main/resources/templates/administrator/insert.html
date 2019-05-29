@@ -14,17 +14,7 @@
 </head>
 <body>
 	<div class="container">
-		<!-- 上余白 -->
-		<div class="row">
-			<div class="col-lg-offset-0 col-lg-6 col-md-8 col-sm-10 col-xs-12">
-				<img src="../../static/img/header_logo.png" th:src="@{/img/header_logo.png}">
-			</div>
-		</div>
-		<!-- login form -->
-		<div class="row">
-			<div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
-				<!-- 背景をグレーに、埋め込んだようなコンポーネント -->
-				<div class="well">
+			<span th:include="administrator/administrator-fragment-part :: frag_header">管理者ヘッダー</span>
 
 				
 <!-- ここから上を編集する必要はありません -->
