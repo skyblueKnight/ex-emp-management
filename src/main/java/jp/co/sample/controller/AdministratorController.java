@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jp.co.sample.domain.Administrator;
 import jp.co.sample.form.InsertAdministratorForm;
-import jp.co.sample.form.UpdateEmployeeForm;
 import jp.co.sample.service.AdministratorService;
 
 /**
