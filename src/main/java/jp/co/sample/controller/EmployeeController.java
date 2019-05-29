@@ -1,6 +1,5 @@
 package jp.co.sample.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,6 @@ public class EmployeeController {
 	@RequestMapping("/showList")
 	public String showList(Model model) {
 		List<Employee> employeeList = employeeService.showList();
-		System.out.println(employeeList);
 		model.addAttribute("employeeList", employeeList);
 
 		return "employee/list";
@@ -64,6 +62,8 @@ public class EmployeeController {
 	public String showDetail(String id, Model model) {
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee",employee);
+		
+		System.out.println("showDetail");
 		
 		return "employee/detail";		
 	}

@@ -82,7 +82,7 @@
 							      写真
 							    </th>
 							    <td>
-							      <img src="../../static/img/e2.png" th:src="">
+							      <img src="../../static/img/e2.png" th:src="@{/img/e1.png}">
 							    </td>
 							  </tr>
 							  <tr>
@@ -154,9 +154,9 @@
 							      扶養人数
 							    </th>
 							    <td>
-							    	<label class="error-messages">
+							    	<!--  <label class="error-messages">
 											扶養人数を入力してください
-									</label>
+									</label> -->
 									<label class="control-label" style="color: red" for="dependentsCount"></label>
 									<input type="hidden" name="id" th:value="${employee.id}">
 									<input type="text" name="dependentsCount" id="dependentsCount" class="form-control" value="3" th:value="${employee.dependentsCount}">

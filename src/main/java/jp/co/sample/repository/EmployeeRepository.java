@@ -58,8 +58,6 @@ public class EmployeeRepository {
 			List<Employee> employeeList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 			return employeeList;
 		} catch (DataAccessException e) {
-			System.out.println("error");
-			System.err.println(e);
 			return null;
 		}
 	}
